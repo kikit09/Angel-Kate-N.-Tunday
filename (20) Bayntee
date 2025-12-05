@@ -1,0 +1,16 @@
+import javax.swing.*;
+
+public class Bayntee{
+    public static void main(String[] args) {
+        int[] arr = {5, 22, 30, 7, 40, 15, 18};
+        String result = "";
+
+        for (int n : arr) {
+            if (n % 2 == 0 && n > 20) {
+                result += n + " ";
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, "Even numbers > 20:\n" + result);
+    }
+}
