@@ -1,0 +1,21 @@
+import javax.swing.*;
+
+public class DiseSyete {
+    public static void main(String[] args) {
+        int[] arr = {8, 12, 4, 20, 15};
+
+        int max = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+
+        for (int n : arr) {
+            if (n > max) {
+                second = max;
+                max = n;
+            } else if (n > second && n != max) {
+                second = n;
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, "Second highest = " + second);
+    }
+}
