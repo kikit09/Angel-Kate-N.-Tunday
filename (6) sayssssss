@@ -1,0 +1,18 @@
+import javax.swing.*;
+public class Saysss {
+    public static void main(String[] args) {
+
+            int[] arr = {5, 10, 7, 3, 8};
+            int sum = 0;
+            int count = 0;
+
+            for (int n : arr) {
+               if (n % 2 != 0) {
+                 sum += n;
+                 count++;
+               } 
+            }
+                       double avg = (count > 0) ? (double)sum / count : 0;
+        JOptionPane.showMessageDialog(null, "Average of odd numbers = " + avg);       
+    }    
+}
