@@ -1,0 +1,15 @@
+import javax.swing.*;
+
+public class tresi {
+    public static void main(String[] args) {
+        int[] grades = {90, 40, 75, 60, 88};
+        int pass = 0, fail = 0;
+
+        for (int g : grades) {
+            if (g >= 75) pass++;
+            else fail++;
+        }
+
+        JOptionPane.showMessageDialog(null, "Pass: " + pass + "\nFail: " + fail);
+    }
+}
