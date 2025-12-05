@@ -1,7 +1,8 @@
 import javax.swing.JOptionPane;
 
-public class Uno {
-    public static void main(String[] args) {
+    public class Uno {
+    
+      public static void main(String[] args) {
         int number = -1;
 
         while (number < 1 || number > 100) {
