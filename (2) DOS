@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class Twodaks {
+public class dos {
     public static void main(String[] args) {
         int[] numbers = new int[10];
         int count = 0;
