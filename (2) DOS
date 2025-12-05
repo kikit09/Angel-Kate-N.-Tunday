@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class dows {
+public class Twodaks {
     public static void main(String[] args) {
         int[] numbers = new int[10];
         int count = 0;
@@ -16,5 +16,3 @@ public class dows {
         JOptionPane.showMessageDialog(null, "The number 7 appears " + count + " times");
    }
 }
-
-
