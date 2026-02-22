@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewport="0 0 100 100" style="fill:black;font-size:24px;"><text y="50%">🌸</text></svg>') 16 0, auto;
+        }
+
+        /* The Message Container */
+        .message-box {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none; /* Lets clicks pass through to the garden */
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #d6336c;
+            margin: 0;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 10px 0 0 0;
+        }
+
+        .instruction {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* Flower Styling */
+        .flower {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            transform: translate(-50%, -50%) scale(0);
+            animation: bloom 0.6s forwards ease-out;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        .stem {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            width: 4px;
+            height: 100px;
+            background: #4caf50;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            z-index: -1;
+        }
+
+        /* Animations */
+        @keyframes bloom {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(-10deg); }
+            60% { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Floating Hearts on Click */
+        .heart {
+            position: absolute;
+            color: #ff4d4d;
+            font-size: 20px;
+            animation: floatUp 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- CHANGE YOUR MESSAGE HERE -->
+    <div class="message-box">
+        <h1>For My Love</h1>
+        <p>Click anywhere to plant a flower for you! 🌸</p>
+    </div>
+
+    <div class="instruction">Tap anywhere to grow a flower</div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const herName = "Love"; // This adds a little signature if you want
+        // ---------------------
+
+        const colors = ['#FF69B4', '#FF1493', '#DA70D6', '#FFB6C1', '#FFC0CB', '#FFFFFF'];
+        
+        document.addEventListener('click', function(e) {
+            createFlower(e.clientX, e.clientY);
+            createHeart(e.clientX, e.clientY);
+        });
+
+        function createFlower(x, y) {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            
+            // Randomize flower look
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const size = 60 + Math.random() * 40; // Random size between 60 and 100
+            
+            // SVG for the flower (A simple flower shape)
+            flower.innerHTML = `
+                <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+                    <path d="M50 50 
+                             m -30 -10 
+                             a 30 30 0 1 0 60 0 
+                             a 30 30 0 1 0 -60 0
+                             M50 50
+                             m -30 20
+                             a 30 30 0 1 0 60 0
+                             a 30 30 0 1 0 -60 0
+                             M50 50
+                             m 0 -40
+                             a 30 30 0 1 0 0 80
+                             a 30 30 0 1 0 0 -80
+                             " 
+                          fill="${color}" stroke="white" stroke-width="2" />
+                    <circle cx="50" cy="50" r="15" fill="#FFD700" />
+                </svg>
+                <div class="stem"></div>
+            `;
+
+            // Position
+            flower.style.left = x + 'px';
+            flower.style.top = y + 'px';
+
+            // Randomize animation delay slightly for natural feel
+            flower.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+
+            document.body.appendChild(flower);
+
+            // Clean up DOM after a while so it doesn't crash browser if clicked 1000 times
+            setTimeout(() => {
+                flower.remove();
+            }, 10000);
+        }
+
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
